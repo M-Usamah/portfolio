@@ -116,18 +116,42 @@ if (contactForm) {
         
         // Get form values
         const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
+        const user_email = document.getElementById('email').value;
         const subject = document.getElementById('subject').value;
         const message = document.getElementById('message').value;
         
-        // Here you would normally send the form data to a server
-        console.log('Form submitted:', { name, email, subject, message });
+        // Show loading state
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
         
-        // Show success message (you can customize this)
-        alert('Thank you for your message! I will get back to you soon.');
+        // Prepare template parameters for EmailJS
+        const templateParams = {
+            name: name,
+            user_email: user_email,
+            title: subject,
+            message: message
+        };
         
-        // Reset form
-        contactForm.reset();
+        // Send email using EmailJS
+        emailjs.send('service_qn6pxw8', 'template_sxbojuf', templateParams)
+            .then(() => {
+                // Show success message
+                alert('Thank you for your message! I will get back to you soon.');
+                
+                // Reset form
+                contactForm.reset();
+            })
+            .catch((error) => {
+                console.error('Error sending email:', error);
+                alert('Sorry, there was an error sending your message. Please try again later.');
+            })
+            .finally(() => {
+                // Restore button state
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
     });
 }
 
