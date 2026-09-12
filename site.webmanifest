@@ -1,0 +1,29 @@
+{
+  "name": "Mohammed Usamah — AI/ML Engineer",
+  "short_name": "Usamah",
+  "description": "Portfolio of Mohammed Usamah, AI/ML engineer specializing in computer vision, NLP, digital twins, and Unreal Engine 5.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#07080c",
+  "theme_color": "#07080c",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "assets/images/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/logo-avatar.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}
