@@ -31,7 +31,7 @@ export const site = {
   email: "mohammedusamah84@gmail.com",
   github: "https://github.com/M-Usamah",
   linkedin: "https://www.linkedin.com/in/mohammed-usamah-952030173/",
-  url: "https://m-usamah.github.io",
+  url: "https://portfolio-chi-virid-ah5i4dam0y.vercel.app",
   locale: "en_US",
   themeColor: "#07080c",
   description:

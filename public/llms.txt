@@ -6,11 +6,11 @@ Mohammed Usamah (also known as M-Usamah) trains custom models and ships producti
 
 ## Primary
 
-- [Portfolio home](https://m-usamah.github.io/): Full profile, projects, experience, certificates, and contact
-- [About](https://m-usamah.github.io/#about): Biography, focus areas, and FAQ
-- [Projects](https://m-usamah.github.io/#projects): Digital Twin Builder, Unreal plugins, computer vision, and AI systems
-- [Experience](https://m-usamah.github.io/#experience): InfotainmentAcademy, JayzenAI, freelance, and earlier roles
-- [Contact](https://m-usamah.github.io/#contact): Email and contact form
+- [Portfolio home](https://portfolio-chi-virid-ah5i4dam0y.vercel.app/): Full profile, projects, experience, certificates, and contact
+- [About](https://portfolio-chi-virid-ah5i4dam0y.vercel.app/#about): Biography, focus areas, and FAQ
+- [Projects](https://portfolio-chi-virid-ah5i4dam0y.vercel.app/#projects): Digital Twin Builder, Unreal plugins, computer vision, and AI systems
+- [Experience](https://portfolio-chi-virid-ah5i4dam0y.vercel.app/#experience): InfotainmentAcademy, JayzenAI, freelance, and earlier roles
+- [Contact](https://portfolio-chi-virid-ah5i4dam0y.vercel.app/#contact): Email and contact form
 
 ## Profiles
 
@@ -19,7 +19,7 @@ Mohammed Usamah (also known as M-Usamah) trains custom models and ships producti
 
 ## Optional
 
-- [Skills](https://m-usamah.github.io/#skills): Languages, ML, computer vision, NLP, Unreal, tools
-- [Certificates](https://m-usamah.github.io/#certificates): Coursera, DeepLearning.AI, and related credentials
-- [Sitemap](https://m-usamah.github.io/sitemap.xml): Machine-readable URL list
-- [Full LLM brief](https://m-usamah.github.io/llms-full.txt): Longer factual summary for agents
+- [Skills](https://portfolio-chi-virid-ah5i4dam0y.vercel.app/#skills): Languages, ML, computer vision, NLP, Unreal, tools
+- [Certificates](https://portfolio-chi-virid-ah5i4dam0y.vercel.app/#certificates): Coursera, DeepLearning.AI, and related credentials
+- [Sitemap](https://portfolio-chi-virid-ah5i4dam0y.vercel.app/sitemap.xml): Machine-readable URL list
+- [Full LLM brief](https://portfolio-chi-virid-ah5i4dam0y.vercel.app/llms-full.txt): Longer factual summary for agents
