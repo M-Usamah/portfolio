@@ -1,0 +1,24 @@
+{
+  "name": "Mohammed Usamah",
+  "short_name": "Usamah",
+  "description": "AI/ML engineer — computer vision, digital twins, and Unreal Engine 5 tools.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07080c",
+  "theme_color": "#07080c",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/assets/images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/images/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
