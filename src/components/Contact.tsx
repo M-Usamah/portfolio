@@ -5,6 +5,9 @@ import { site } from "@/data/content";
 
 type Status = "idle" | "loading" | "success" | "error";
 
+/** Web3Forms free tier requires browser-side submit (access key is safe to expose). */
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
+
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -15,23 +18,52 @@ export function Contact() {
     setMessage("");
 
     const form = e.currentTarget;
+
+    if (!WEB3FORMS_KEY) {
+      setStatus("error");
+      setMessage(`Mail is not configured. Email me at ${site.email} instead.`);
+      return;
+    }
+
     const data = new FormData(form);
     const payload = {
-      name: String(data.get("name") || ""),
-      email: String(data.get("email") || ""),
-      message: String(data.get("message") || ""),
+      access_key: WEB3FORMS_KEY,
+      subject: `Portfolio contact from ${String(data.get("name") || "someone")}`,
+      name: String(data.get("name") || "").trim(),
+      email: String(data.get("email") || "").trim(),
+      message: String(data.get("message") || "").trim(),
+      from_name: String(data.get("name") || "").trim(),
+      botcheck: "",
     };
 
+    if (!payload.name || !payload.email || !payload.message) {
+      setStatus("error");
+      setMessage("All fields are required.");
+      return;
+    }
+
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify(payload),
       });
-      const json = (await res.json()) as { ok?: boolean; error?: string };
-      if (!res.ok || !json.ok) {
-        throw new Error(json.error || "Failed to send message");
+
+      const text = await res.text();
+      let json: { success?: boolean; message?: string } = {};
+      try {
+        json = text ? (JSON.parse(text) as { success?: boolean; message?: string }) : {};
+      } catch {
+        throw new Error("Could not reach the mail service. Try emailing me directly.");
       }
+
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to send message");
+      }
+
       setStatus("success");
       setMessage("Message sent. I’ll get back to you soon.");
       form.reset();
@@ -104,6 +136,15 @@ export function Contact() {
             className="relative overflow-hidden rounded-[28px] border border-[var(--line)] bg-[var(--bg-card)] p-6 md:p-8"
           >
             <div className="pointer-events-none absolute -right-16 -top-16 size-48 rounded-full bg-[radial-gradient(circle,rgba(46,233,212,0.12),transparent_70%)]" />
+            {/* Honeypot for spam bots — must stay empty */}
+            <input
+              type="checkbox"
+              name="botcheck"
+              tabIndex={-1}
+              autoComplete="off"
+              className="hidden"
+              aria-hidden="true"
+            />
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block text-sm">
                 <span className="mb-1.5 block text-[var(--muted)]">Name</span>
