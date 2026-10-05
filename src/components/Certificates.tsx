@@ -1,42 +1,52 @@
 import { certificates } from "@/data/content";
+import { Reveal } from "@/components/Reveal";
 
 export function Certificates() {
   return (
-    <section id="certificates" className="section-pad">
+    <section id="certificates" className="section-pad" aria-labelledby="certs-heading">
       <div className="container-page">
-        <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="mb-3 font-mono text-xs uppercase tracking-[0.16em] text-[var(--accent)]">
-              — Learning
-            </p>
-            <h2 className="font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]">
-              Certificates
-            </h2>
-            <p className="mt-3 max-w-xl text-[var(--muted)]">
-              ML, deep learning, agents, and production AI tooling.
+        <Reveal>
+          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <h2
+                id="certs-heading"
+                className="font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]"
+              >
+                Certificates
+              </h2>
+              <p className="mt-3 max-w-xl text-[var(--muted)]">
+                ML, deep learning, agents, and production AI tooling.
+              </p>
+            </div>
+            <p className="font-mono text-sm text-[var(--faint)]">
+              <span className="text-[var(--accent)]">{certificates.length}</span> credentials, swipe
+              or scroll
             </p>
           </div>
-          <p className="font-mono text-sm text-[var(--faint)]">
-            <span className="text-[var(--accent)]">{certificates.length}</span> credentials
-          </p>
-        </div>
+        </Reveal>
+      </div>
 
-        <div className="grid gap-px overflow-hidden rounded-[24px] border border-[var(--line)] bg-[var(--line)] sm:grid-cols-2 xl:grid-cols-3">
-          {certificates.map((cert, index) => (
+      <div
+        className="rail"
+        role="region"
+        aria-label="Certificates"
+        tabIndex={0}
+      >
+        <div className="rail-track">
+          {certificates.map((cert) => (
             <article
               key={`${cert.title}-${cert.date}`}
-              className="group flex flex-col bg-[var(--bg-elevated)] p-6 transition hover:bg-[#121621]"
+              className="spot tilt group flex w-[min(82vw,340px)] shrink-0 snap-start flex-col rounded-[22px] border border-[var(--line)] bg-[var(--bg-card)] p-6 transition duration-300 hover:-translate-y-1 hover:border-[rgba(46,233,212,0.28)]"
             >
               <div className="mb-5 flex items-center justify-between gap-3">
-                <span className="font-mono text-[0.68rem] tracking-[0.14em] text-[var(--faint)]">
-                  {String(index + 1).padStart(2, "0")}
+                <span className="font-mono text-[0.68rem] tracking-[0.1em] text-[var(--accent)]">
+                  {cert.issuer}
                 </span>
                 <time className="font-mono text-[0.7rem] text-[var(--faint)]">{cert.date}</time>
               </div>
-              <h3 className="text-[1.05rem] font-semibold leading-snug tracking-[-0.03em] transition group-hover:text-[var(--accent)]">
+              <h3 className="text-[1.05rem] font-semibold leading-snug tracking-[-0.03em]">
                 {cert.title}
               </h3>
-              <p className="mt-2 text-sm text-[var(--accent)]">{cert.issuer}</p>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">
                 {cert.description}
               </p>

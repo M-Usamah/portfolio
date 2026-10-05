@@ -1,4 +1,5 @@
 import { about, site } from "@/data/content";
+import { Reveal } from "@/components/Reveal";
 
 export function About() {
   return (
@@ -6,9 +7,6 @@ export function About() {
       <div className="container-page">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.08fr] lg:gap-16">
           <div>
-            <p className="mb-3 font-mono text-xs uppercase tracking-[0.16em] text-[var(--accent)]">
-              — About
-            </p>
             <h2
               id="about-heading"
               className="font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]"
@@ -51,18 +49,11 @@ export function About() {
               </p>
             ))}
 
-            <div className="mt-10 grid gap-6 sm:grid-cols-3">
-              {about.focuses.map((item) => (
-                <div key={item.title} className="border-t border-[var(--line)] pt-4">
-                  <h3 className="text-sm font-semibold tracking-[-0.02em]">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--faint)]">{item.body}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 
-        <dl className="mt-14 grid gap-4 rounded-[24px] border border-[var(--line)] bg-[var(--bg-card)] p-6 sm:grid-cols-2 lg:grid-cols-3 lg:p-8">
+        <Reveal>
+        <dl className="mt-16 grid gap-x-10 gap-y-6 border-t border-[var(--line)] pt-8 sm:grid-cols-2 lg:grid-cols-3">
           {about.facts.map((fact) => (
             <div key={fact.label}>
               <dt className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-[var(--faint)]">
@@ -72,6 +63,7 @@ export function About() {
             </div>
           ))}
         </dl>
+        </Reveal>
 
         <div className="mt-14">
           <h3 className="font-[family-name:var(--font-syne)] text-xl font-bold tracking-[-0.03em]">

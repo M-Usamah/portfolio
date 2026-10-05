@@ -7,7 +7,7 @@ export function Footer() {
         <div>
           <p className="font-medium">{site.name}</p>
           <p className="mt-1 text-sm text-[var(--faint)]">
-            © {new Date().getFullYear()} · AI/ML · Computer Vision · Unreal
+            © {new Date().getFullYear()} · AI/ML, computer vision, security and automation
           </p>
         </div>
         <div className="flex flex-wrap gap-5 text-sm text-[var(--muted)]">

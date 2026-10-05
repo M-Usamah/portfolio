@@ -1,6 +1,6 @@
 # Mohammed Usamah
 
-> AI/ML engineer building computer vision models, NLP / agent systems, digital twins, and Unreal Engine 5 Python editor tools. Available for freelance and contract work.
+> AI/ML engineer building computer vision models, NLP / agent systems, digital twins, Unreal Engine 5 Python editor tools, cybersecurity, and n8n workflow automation. Available for freelance and contract work.
 
 Mohammed Usamah (also known as M-Usamah) trains custom models and ships production tooling. He currently builds Unreal Engine 5.6 Python plugins at InfotainmentAcademy, works as an AI/ML engineer at JayzenAI, and takes freelance computer-vision and NLP projects.
 
@@ -16,6 +16,8 @@ Mohammed Usamah (also known as M-Usamah) trains custom models and ships producti
 
 - [GitHub](https://github.com/M-Usamah): Source code and public repositories
 - [LinkedIn](https://www.linkedin.com/in/mohammed-usamah-952030173/): Professional profile
+
+- [Services](https://portfolio-chi-virid-ah5i4dam0y.vercel.app/#capabilities): Computer vision, cybersecurity, n8n automation, digital twins in Unreal
 
 ## Optional
 

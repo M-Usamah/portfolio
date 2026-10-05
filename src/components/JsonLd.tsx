@@ -1,4 +1,4 @@
-import { about, experience, projects, site } from "@/data/content";
+import { about, capabilities, experience, projects, site } from "@/data/content";
 
 const featuredProjects = projects.slice(0, 8);
 
@@ -24,7 +24,7 @@ export function JsonLd() {
         "@type": "ProfilePage",
         "@id": webpageId,
         url: `${site.url}/`,
-        name: `${site.name} | ${site.title} — Computer Vision & Digital Twins`,
+        name: `${site.name} | ${site.title}, Security & Automation`,
         description: site.description,
         isPartOf: { "@id": websiteId },
         about: { "@id": personId },
@@ -50,8 +50,18 @@ export function JsonLd() {
         hasOccupation: {
           "@type": "Occupation",
           name: site.title,
-          skills: "Computer Vision, NLP, Digital Twins, Unreal Engine, Python",
+          skills:
+            "Computer Vision, NLP, Digital Twins, Unreal Engine, Python, Cybersecurity, n8n Automation",
         },
+        makesOffer: capabilities.map((item) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: item.title,
+            description: item.body,
+            provider: { "@id": personId },
+          },
+        })),
         worksFor: experience
           .filter((item) => /Present/i.test(item.date))
           .map((item) => ({
@@ -91,7 +101,7 @@ export function JsonLd() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph).replace(/</g, "\\u003c") }}
     />
   );
 }

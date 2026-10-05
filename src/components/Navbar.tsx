@@ -5,13 +5,12 @@ import Image from "next/image";
 import { site } from "@/data/content";
 
 const links = [
-  { href: "#home", label: "Home" },
   { href: "#about", label: "About" },
+  { href: "#capabilities", label: "Services" },
   { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Work" },
-  { href: "#certificates", label: "Certificates" },
   { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact", cta: true },
+  { href: "#contact", label: "Get in touch", cta: true },
 ];
 
 export function Navbar() {

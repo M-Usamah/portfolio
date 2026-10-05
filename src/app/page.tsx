@@ -3,6 +3,11 @@ import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { Skills } from "@/components/Skills";
 import { Projects } from "@/components/Projects";
+import { Capabilities } from "@/components/Capabilities";
+import { MotionReel } from "@/components/MotionReel";
+import { Marquee } from "@/components/Marquee";
+import { PointerEffects } from "@/components/PointerEffects";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import { Certificates } from "@/components/Certificates";
 import { Experience } from "@/components/Experience";
 import { Contact } from "@/components/Contact";
@@ -17,12 +22,17 @@ export default function HomePage() {
       >
         Skip to content
       </a>
+      <ScrollProgress />
+      <PointerEffects />
       <Navbar />
       <main id="main">
         <Hero />
+        <Marquee />
         <About />
+        <Capabilities />
         <Skills />
         <Projects />
+        <MotionReel />
         <Certificates />
         <Experience />
         <Contact />

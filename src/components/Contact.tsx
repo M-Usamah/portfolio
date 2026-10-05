@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { site } from "@/data/content";
+import { Reveal } from "@/components/Reveal";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -80,16 +81,17 @@ export function Contact() {
   return (
     <section id="contact" className="section-pad">
       <div className="container-page">
+        <Reveal>
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
             <p className="mb-3 font-mono text-xs uppercase tracking-[0.16em] text-[var(--accent)]">
-              — Contact
+             , Contact
             </p>
             <h2 className="font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]">
               Let’s build something
             </h2>
             <p className="mt-4 max-w-md text-[var(--muted)]">
-              Open to freelance, Unreal tooling, and computer-vision work. Send a note or reach out
+              Open to freelance, Unreal tooling, computer vision, security and n8n automation work. Send a note or reach out
               directly.
             </p>
 
@@ -136,7 +138,7 @@ export function Contact() {
             className="relative overflow-hidden rounded-[28px] border border-[var(--line)] bg-[var(--bg-card)] p-6 md:p-8"
           >
             <div className="pointer-events-none absolute -right-16 -top-16 size-48 rounded-full bg-[radial-gradient(circle,rgba(46,233,212,0.12),transparent_70%)]" />
-            {/* Honeypot for spam bots — must stay empty */}
+            {/* Honeypot for spam bots, must stay empty */}
             <input
               type="checkbox"
               name="botcheck"
@@ -151,7 +153,7 @@ export function Contact() {
                 <input
                   name="name"
                   required
-                  className="w-full rounded-2xl border border-[var(--line)] bg-black/35 px-4 py-3.5 outline-none transition placeholder:text-[var(--faint)] focus:border-[var(--accent)]"
+                  className="w-full rounded-2xl border border-[var(--line)] bg-black/35 px-4 py-3.5 outline-none transition placeholder:text-[var(--faint)] focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30"
                   placeholder="Your name"
                 />
               </label>
@@ -161,7 +163,7 @@ export function Contact() {
                   name="email"
                   type="email"
                   required
-                  className="w-full rounded-2xl border border-[var(--line)] bg-black/35 px-4 py-3.5 outline-none transition placeholder:text-[var(--faint)] focus:border-[var(--accent)]"
+                  className="w-full rounded-2xl border border-[var(--line)] bg-black/35 px-4 py-3.5 outline-none transition placeholder:text-[var(--faint)] focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30"
                   placeholder="you@email.com"
                 />
               </label>
@@ -172,14 +174,14 @@ export function Contact() {
                 name="message"
                 required
                 rows={6}
-                className="w-full resize-y rounded-2xl border border-[var(--line)] bg-black/35 px-4 py-3.5 outline-none transition placeholder:text-[var(--faint)] focus:border-[var(--accent)]"
+                className="w-full resize-y rounded-2xl border border-[var(--line)] bg-black/35 px-4 py-3.5 outline-none transition placeholder:text-[var(--faint)] focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30"
                 placeholder="What are you building?"
               />
             </label>
             <button
               type="submit"
               disabled={status === "loading"}
-              className="mt-6 w-full rounded-full bg-[var(--accent)] px-6 py-3.5 text-sm font-semibold text-[#041614] transition hover:brightness-110 disabled:opacity-60 sm:w-auto"
+              className="btn mt-6 w-full rounded-full bg-[var(--accent)] px-6 py-3.5 text-sm font-semibold text-[#041614] hover:brightness-110 disabled:opacity-60 sm:w-auto"
             >
               {status === "loading" ? "Sending…" : "Send message"}
             </button>
@@ -195,6 +197,7 @@ export function Contact() {
             )}
           </form>
         </div>
+        </Reveal>
       </div>
     </section>
   );

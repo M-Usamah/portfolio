@@ -22,7 +22,7 @@ const mono = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
-const titleDefault = `${site.name} | ${site.title} — Computer Vision & Digital Twins`;
+const titleDefault = `${site.name} | ${site.title}, Security & Automation`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -47,6 +47,11 @@ export const metadata: Metadata = {
     "TensorFlow",
     "RAG",
     "freelance AI",
+    "cybersecurity",
+    "application security",
+    "n8n automation",
+    "n8n workflows",
+    "workflow automation freelancer",
     "InfotainmentAcademy",
     "JayzenAI",
   ],
@@ -91,7 +96,7 @@ export const metadata: Metadata = {
         url: "/assets/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: `${site.name}, ${site.title} — computer vision, digital twins, and Unreal Engine`,
+        alt: `${site.name}, ${site.title}, computer vision, digital twins, and Unreal Engine`,
       },
     ],
   },

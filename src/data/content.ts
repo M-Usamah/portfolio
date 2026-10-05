@@ -21,13 +21,23 @@ export type Certificate = {
   description: string;
 };
 
+export type MotionItem = {
+  title: string;
+  description: string;
+  tags: string[];
+  /** Path under /public, e.g. "/assets/motion/reel.mp4". Falls back to a CSS animation. */
+  video?: string;
+  poster?: string;
+  variant: "orbit" | "wave" | "grid";
+};
+
 export const site = {
   name: "Mohammed Usamah",
   givenName: "Mohammed",
   familyName: "Usamah",
   alternateName: ["M-Usamah", "M Usamah", "Mohammed Usamah AI/ML Engineer"],
   title: "AI/ML Engineer",
-  subtitle: "computer vision, digital twins & Unreal tooling",
+  subtitle: "computer vision, digital twins, security & automation",
   email: "mohammedusamah84@gmail.com",
   github: "https://github.com/M-Usamah",
   linkedin: "https://www.linkedin.com/in/mohammed-usamah-952030173/",
@@ -35,9 +45,9 @@ export const site = {
   locale: "en_US",
   themeColor: "#07080c",
   description:
-    "Mohammed Usamah is an AI/ML engineer building computer vision models, NLP systems, digital twins, and Unreal Engine 5 Python editor tools. Available for freelance and contract work.",
+    "Mohammed Usamah is an AI/ML engineer building computer vision models, NLP systems, digital twins, and Unreal Engine 5 Python editor tools, with a focus on secure software and n8n workflow automation. Available for freelance and contract work.",
   shortDescription:
-    "AI/ML engineer specializing in computer vision, NLP, digital twins, and Unreal Engine 5 tools.",
+    "AI/ML engineer specializing in computer vision, digital twins, Unreal Engine 5 tools, cybersecurity, and n8n automation.",
   knowsAbout: [
     "Python",
     "Unreal Python",
@@ -57,18 +67,25 @@ export const site = {
     "Hugging Face",
     "Machine Learning",
     "Agentic AI",
+    "Cybersecurity",
+    "Application Security",
+    "Secure Coding",
+    "Threat Modeling",
+    "n8n",
+    "Workflow Automation",
   ],
 } as const;
 
-/** Factual about copy — shared by the UI and structured data / llms.txt */
+/** Factual about copy, shared by the UI and structured data / llms.txt */
 export const about = {
   headline: "Building models that ship into real tools",
-  roleLine: "AI/ML engineer · Unreal Python plugin developer",
+  roleLine: "AI/ML engineer, Unreal Python plugin developer, security and automation",
   summary:
     "Mohammed Usamah is an AI/ML engineer with about two years of experience training custom models and shipping production tools. He currently builds Unreal Engine 5 Python editor plugins at InfotainmentAcademy, contributes as an AI/ML engineer at JayzenAI, and takes freelance computer-vision and NLP work.",
   paragraphs: [
-    "I specialize in custom model training — computer vision, NLP, and agentic systems — then wrap that work in tools people can actually run. Right now that means Unreal Engine 5.6 Python plugins for digital twins, FBX import, asset migration, and packaging at InfotainmentAcademy.",
+    "I specialize in custom model training, computer vision, NLP, and agentic systems, then wrap that work in tools people can actually run. Right now that means Unreal Engine 5.6 Python plugins for digital twins, FBX import, asset migration, and packaging at InfotainmentAcademy.",
     "Alongside studio tooling I build and fine-tune models at JayzenAI and for freelance clients: YOLO and OpenCV pipelines for cameras and drones, RAG agents for document Q&A, and PyTorch / TensorFlow systems for inspection and analytics.",
+    "I treat security as part of the build: threat modeling, input validation, dependency audits, and hardened deployments. I also automate repetitive work with self-hosted n8n workflows that connect APIs, LLM agents, and RAG pipelines.",
   ],
   focuses: [
     {
@@ -87,7 +104,7 @@ export const about = {
   facts: [
     { label: "Name", value: "Mohammed Usamah" },
     { label: "Role", value: "AI/ML Engineer & Unreal Python Plugin Developer" },
-    { label: "Focus", value: "Computer vision, digital twins, Unreal Engine 5 tools" },
+    { label: "Focus", value: "Computer vision, digital twins, Unreal tools, security, n8n automation" },
     { label: "Current", value: "InfotainmentAcademy · JayzenAI · Freelance" },
     { label: "Stack", value: "Python, PyTorch, TensorFlow, YOLO, Unreal Python" },
     { label: "Availability", value: "Open to freelance and contract work" },
@@ -113,16 +130,50 @@ export const about = {
       answer:
         "Yes. He is available for freelance and contract work in computer vision, digital twins, and Unreal Engine tooling. Contact him via the form or mohammedusamah84@gmail.com.",
     },
+    {
+      question: "Does Mohammed Usamah do cybersecurity and n8n automation work?",
+      answer:
+        "Yes. Alongside AI/ML engineering he does secure-by-default application development, threat modeling and vulnerability review, and builds n8n workflows that connect APIs, LLM agents, and RAG pipelines.",
+    },
   ],
 } as const;
+
+export const capabilities = [
+  {
+    id: "vision",
+    title: "Computer vision",
+    body: "Detection, tracking, and inspection systems for cameras, drones, and live streams, with synthetic data in Isaac Sim.",
+    tags: ["YOLO", "OpenCV", "PyTorch", "Isaac Sim"],
+  },
+  {
+    id: "security",
+    title: "Cybersecurity",
+    body: "Threat modeling, secure code review, input validation, and dependency audits for the apps and AI systems I ship.",
+    tags: ["OWASP Top 10", "Threat modeling", "Secure code review", "Dependency audits"],
+  },
+  {
+    id: "n8n",
+    title: "n8n automation",
+    body: "Self-hosted workflows that connect APIs, webhooks, and LLM agents so repetitive work runs without you.",
+    tags: ["n8n", "Webhooks", "LLM agents", "RAG"],
+  },
+  {
+    id: "twins",
+    title: "Digital twins in Unreal",
+    body: "Photo and video to furniture-level Unreal scenes, delivered as standalone UE5.6 Python plugins.",
+    tags: ["Unreal Engine 5.6", "YOLO-World", "FBX pipeline", "UAT packaging"],
+  },
+] as const;
 
 export const skillGroups = [
   { name: "Languages", items: ["Python", "Unreal Python", "SQL", "HTML / CSS", "JavaScript"] },
   { name: "AI / ML", items: ["PyTorch", "TensorFlow", "Scikit-Learn", "XGBoost", "Deep Learning", "CNNs", "GANs", "VAEs", "Diffusion", "LSTMs", "Time Series"] },
   { name: "Computer Vision", items: ["OpenCV", "YOLO", "YOLO-World", "MediaPipe", "Object Detection", "Pose Estimation", "U-Net", "Isaac Sim"] },
   { name: "NLP & Agents", items: ["NLP", "Transformers", "LLMs", "RAG", "LangChain", "LangGraph", "CrewAI", "Hugging Face", "Whisper", "Gemini"] },
+  { name: "Cybersecurity", items: ["Application Security", "OWASP Top 10", "Threat Modeling", "Secure Code Review", "Vulnerability Assessment", "Security Headers & CSP", "Dependency Auditing", "Secrets Management", "Network Security Basics"] },
+  { name: "Automation", items: ["n8n", "Workflow Automation", "Webhooks", "REST APIs", "LLM Agents", "RAG Pipelines", "Docker (self-hosting)"] },
   { name: "Unreal Engine", items: ["Unreal Engine 5.6", "Editor Tools", "Digital Twins", "FBX Pipeline", "Asset Migration", "UAT Packaging"] },
-  { name: "Tools & Data", items: ["Git", "Docker", "Jupyter", "Pandas", "NumPy", "Matplotlib", "Streamlit", "n8n"] },
+  { name: "Tools & Data", items: ["Git", "Docker", "Jupyter", "Pandas", "NumPy", "Matplotlib", "Streamlit"] },
 ] as const;
 
 export const projects: Project[] = [
@@ -1249,13 +1300,13 @@ export const experience: Experience[] = [
 export const certificates: Certificate[] = [
   {
     title: "Machine Learning Specialization",
-    issuer: "Coursera — Stanford University",
+    issuer: "Coursera, Stanford University",
     date: "December 2023",
     description: "Supervised learning, neural networks, unsupervised learning, and reinforcement learning.",
   },
   {
     title: "Deep Learning Specialization",
-    issuer: "Coursera — DeepLearning.AI",
+    issuer: "Coursera, DeepLearning.AI",
     date: "August 2023",
     description: "CNNs, sequence models, attention mechanisms, and transformers.",
   },
@@ -1333,6 +1384,28 @@ export const certificates: Certificate[] = [
   },
 ];
 
+/** Add real work by setting `video` (and `poster`) to files in /public/assets/motion/. */
+export const motionWork: MotionItem[] = [
+  {
+    title: "Orbit loop",
+    description: "Seamless looping motion study, concentric orbits with eased timing.",
+    tags: ["Loop", "Easing", "Motion study"],
+    variant: "orbit",
+  },
+  {
+    title: "Signal pulse",
+    description: "Audio-reactive style bar animation for data and model-output visuals.",
+    tags: ["Data viz", "Rhythm", "UI motion"],
+    variant: "wave",
+  },
+  {
+    title: "Grid reveal",
+    description: "Staggered grid choreography used for scene and asset reveals.",
+    tags: ["Stagger", "Choreography", "Reveal"],
+    variant: "grid",
+  },
+];
+
 export const filters = [
   { id: "all", label: "All" },
   { id: "unreal", label: "Unreal" },
@@ -1346,4 +1419,4 @@ export const filters = [
   { id: "cybersecurity", label: "Cybersecurity" },
 ] as const;
 
-export const INITIAL_VISIBLE = 12;
+export const INITIAL_VISIBLE = 6;

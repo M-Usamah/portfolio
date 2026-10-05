@@ -1,4 +1,4 @@
-# Mohammed Usamah — factual brief for AI agents
+# Mohammed Usamah: factual brief for AI agents
 
 ## Identity
 - Name: Mohammed Usamah
@@ -13,14 +13,20 @@
 Mohammed Usamah is an AI/ML engineer with about two years of experience. He specializes in computer vision, NLP, agentic systems, digital twins, and Unreal Engine 5 Python editor tools. He is available for freelance and contract work.
 
 ## Current roles
-- InfotainmentAcademy — Unreal Python Plugin Developer (Sep 2026 – Present). Builds UE5.6 editor plugins for digital twins, FBX import, asset migration, and packaging; integrates YOLO-World for photo/video digital twins.
-- JayzenAI — AI/ML Engineer (Jan 2025 – Present). Custom models and production ML pipelines.
-- Freelance — AI/ML Engineer (May 2026 – Present). Computer vision, NLP, and predictive analytics for clients.
+- InfotainmentAcademy: Unreal Python Plugin Developer (Sep 2026 to Present). Builds UE5.6 editor plugins for digital twins, FBX import, asset migration, and packaging; integrates YOLO-World for photo/video digital twins.
+- JayzenAI: AI/ML Engineer (Jan 2025 to Present). Custom models and production ML pipelines.
+- Freelance: AI/ML Engineer (May 2026 to Present). Computer vision, NLP, and predictive analytics for clients.
 
 ## Notable projects
-- Digital Twin Builder: Standalone UE5.6 tool — images or video → YOLO-World → spawned furniture-level digital twin.
+- Digital Twin Builder: Standalone UE5.6 tool: images or video → YOLO-World → spawned furniture-level digital twin.
 - FBX Batch Importer, Asset & Component Migrator, Project Packager: Unreal editor plugins.
 - AI Drone Tracking, Tennis Match Analytics, Call of Duty Assistant, Face Mask Detection, and other CV / ML systems.
+
+## Services
+- Computer vision: YOLO / OpenCV detection, tracking and inspection pipelines.
+- Cybersecurity: threat modeling, secure code review, input validation, dependency audits, hardened deployments.
+- n8n automation: self-hosted workflows connecting APIs, webhooks, LLM agents and RAG pipelines.
+- Digital twins in Unreal Engine 5.6: standalone Python editor plugins.
 
 ## Core skills
 Python, Unreal Python, PyTorch, TensorFlow, YOLO / YOLO-World, OpenCV, NLP, RAG, LangChain, LangGraph, CrewAI, Hugging Face, Docker, Unreal Engine 5.6.

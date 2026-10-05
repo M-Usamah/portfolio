@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import { Reveal } from "@/components/Reveal";
 import { filters, INITIAL_VISIBLE, projects } from "@/data/content";
 
 export function Projects() {
@@ -20,16 +21,16 @@ export function Projects() {
     <section id="projects" className="section-pad">
       <div className="container-page">
         <p className="mb-3 font-mono text-xs uppercase tracking-[0.16em] text-[var(--accent)]">
-          — Selected work
+         , Selected work
         </p>
         <h2 className="font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]">
           What I&apos;m building now
         </h2>
         <p className="mt-3 mb-10 max-w-2xl text-[var(--muted)]">
-          Unreal Engine tools and AI projects — Digital Twin Builder drops into any UE5 project.
+          Unreal Engine tools and AI projects, Digital Twin Builder drops into any UE5 project.
         </p>
 
-        <article className="group relative mb-16 overflow-hidden rounded-[28px] border border-[var(--line)]">
+        <article className="spot tilt group relative mb-16 overflow-hidden rounded-[28px] border border-[var(--line)]">
           <div className="relative min-h-[280px] md:min-h-[420px]">
             <Image
               src="/assets/images/digital-twin-real-vs-digital.png"
@@ -80,13 +81,13 @@ export function Projects() {
           </div>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-          {visible.map((project) => (
+        <div className="grid gap-6 sm:grid-cols-2">
+          {visible.map((project, i) => (
+            <Reveal key={project.title} delay={(i % 3) * 80}>
             <article
-              key={project.title}
-              className="group overflow-hidden rounded-[22px] border border-[var(--line)] bg-[var(--bg-card)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(46,233,212,0.28)] hover:shadow-[var(--shadow)]"
+              className="spot tilt group h-full overflow-hidden rounded-[22px] border border-[var(--line)] bg-[var(--bg-card)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(46,233,212,0.28)] hover:shadow-[var(--shadow)]"
             >
-              <div className="relative h-44 overflow-hidden">
+              <div className="relative h-56 overflow-hidden">
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -95,13 +96,13 @@ export function Projects() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                 />
               </div>
-              <div className="p-5">
+              <div className="p-6">
                 <h4 className="text-[1.05rem] font-semibold tracking-[-0.03em]">{project.title}</h4>
                 <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
                   {project.description}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-1.5">
-                  {project.tags.slice(0, 4).map((tag) => (
+                  {project.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
                       className="rounded-md border border-[var(--line)] px-2 py-0.5 text-[0.7rem] text-[var(--faint)]"
@@ -112,6 +113,7 @@ export function Projects() {
                 </div>
               </div>
             </article>
+            </Reveal>
           ))}
         </div>
 

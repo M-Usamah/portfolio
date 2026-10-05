@@ -1,41 +1,79 @@
+"use client";
+
+import { useState } from "react";
+import { Reveal } from "@/components/Reveal";
 import { skillGroups } from "@/data/content";
 
+/** One skill group at a time: a tab list on the left, its skills on the right. */
 export function Skills() {
-  return (
-    <section id="skills" className="section-pad">
-      <div className="container-page">
-        <p className="mb-3 font-mono text-xs uppercase tracking-[0.16em] text-[var(--accent)]">
-          — Stack
-        </p>
-        <h2 className="font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]">
-          Technical skills
-        </h2>
-        <p className="mt-3 mb-12 max-w-xl text-[var(--muted)]">
-          Models, Unreal tooling, agents, and the libraries behind the work I ship.
-        </p>
+  const [active, setActive] = useState(0);
+  const group = skillGroups[active];
 
-        <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">
-          {skillGroups.map((group) => (
+  return (
+    <section id="skills" className="section-pad" aria-labelledby="skills-heading">
+      <div className="container-page">
+        <Reveal>
+          <h2
+            id="skills-heading"
+            className="font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]"
+          >
+            Technical skills
+          </h2>
+          <p className="mt-3 mb-12 max-w-xl text-[var(--muted)]">
+            Pick an area to see the tools behind the work I ship.
+          </p>
+        </Reveal>
+
+        <Reveal>
+          <div className="grid gap-8 md:grid-cols-[260px_1fr] md:gap-14">
             <div
-              key={group.name}
-              className="grid gap-4 py-6 md:grid-cols-[200px_1fr] md:items-start md:gap-10"
+              role="tablist"
+              aria-label="Skill groups"
+              className="flex gap-2 overflow-x-auto pb-2 md:flex-col md:gap-1 md:overflow-visible md:pb-0"
             >
-              <h3 className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--accent)]">
+              {skillGroups.map((g, i) => (
+                <button
+                  key={g.name}
+                  type="button"
+                  role="tab"
+                  id={`skill-tab-${i}`}
+                  aria-selected={active === i}
+                  aria-controls="skill-panel"
+                  onClick={() => setActive(i)}
+                  className={`shrink-0 rounded-full px-4 py-2 text-left text-sm transition md:rounded-xl md:py-2.5 ${
+                    active === i
+                      ? "bg-[var(--accent-soft)] font-medium text-[var(--accent)]"
+                      : "text-[var(--muted)] hover:bg-white/[0.04] hover:text-white"
+                  }`}
+                >
+                  {g.name}
+                </button>
+              ))}
+            </div>
+
+            <div
+              id="skill-panel"
+              role="tabpanel"
+              aria-labelledby={`skill-tab-${active}`}
+              className="min-h-[220px] rounded-[24px] border border-[var(--line)] bg-[var(--bg-card)] p-7 md:p-10"
+            >
+              <h3 className="font-[family-name:var(--font-syne)] text-2xl font-bold tracking-[-0.03em]">
                 {group.name}
               </h3>
-              <ul className="flex flex-wrap gap-x-3 gap-y-2">
-                {group.items.map((item) => (
+              <ul key={group.name} className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+                {group.items.map((item, i) => (
                   <li
                     key={item}
-                    className="rounded-lg border border-[var(--line)] bg-white/[0.025] px-3 py-1.5 text-sm text-[var(--muted)] transition hover:border-[rgba(46,233,212,0.3)] hover:text-white"
+                    className="skill-in text-lg text-[var(--muted)]"
+                    style={{ animationDelay: `${i * 35}ms` }}
                   >
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
-          ))}
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

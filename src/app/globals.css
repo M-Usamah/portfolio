@@ -63,20 +63,6 @@ body::before {
     linear-gradient(180deg, #07080c 0%, #080a12 100%);
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.28;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
-}
-
 a {
   color: inherit;
   text-decoration: none;
@@ -95,13 +81,13 @@ a {
 }
 
 .section-pad {
-  padding: 120px 0;
+  padding: 150px 0;
   scroll-margin-top: 100px;
 }
 
 @media (max-width: 768px) {
   .section-pad {
-    padding: 88px 0;
+    padding: 96px 0;
   }
 }
 
@@ -148,4 +134,447 @@ a {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* ---------- Motion ---------- */
+
+.reveal {
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Only hide pre-reveal when JS can run, so no-JS visitors and crawlers still see content */
+@media (scripting: enabled) {
+  .reveal[data-shown="false"] {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+
+@keyframes float-glow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0) scale(1.08);
+  }
+}
+
+.hero-glow {
+  animation: float-glow 9s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bar-pulse {
+  0%,
+  100% {
+    transform: scaleY(0.15);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes cell-pulse {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: scale(0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes core-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+
+.motion-stage {
+  background: radial-gradient(circle at 50% 50%, rgba(139, 124, 255, 0.18), #07080c 70%);
+}
+
+.motion-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 40px var(--accent);
+  animation: core-breathe 3s ease-in-out infinite;
+}
+
+.motion-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  border: 1px solid rgba(46, 233, 212, 0.35);
+  border-top-color: var(--accent);
+  animation: spin 6s linear infinite;
+}
+
+.motion-ring-1 {
+  width: 34%;
+  aspect-ratio: 1;
+  margin: -17% 0 0 -17%;
+}
+
+.motion-ring-2 {
+  width: 54%;
+  aspect-ratio: 1;
+  margin: -27% 0 0 -27%;
+  animation-duration: 9s;
+  animation-direction: reverse;
+  border-top-color: var(--accent-2);
+}
+
+.motion-ring-3 {
+  width: 76%;
+  aspect-ratio: 1;
+  margin: -38% 0 0 -38%;
+  animation-duration: 14s;
+}
+
+.motion-bar {
+  width: 3.5%;
+  height: 56%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  transform-origin: center;
+  animation: bar-pulse 1.6s ease-in-out infinite;
+}
+
+.motion-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  padding: 7%;
+  height: 100%;
+  align-content: center;
+}
+
+.motion-grid span {
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  animation: cell-pulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal[data-shown="false"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-glow,
+  .animate-fade-up,
+  .motion-core,
+  .motion-ring,
+  .motion-bar,
+  .motion-grid span {
+    animation: none;
+  }
+}
+
+/* ---------- Modern layer ---------- */
+
+@keyframes char-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.55em) rotate(4deg);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+.char-in {
+  animation: char-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cursor-glow {
+  background: radial-gradient(circle, rgba(46, 233, 212, 0.1), transparent 65%);
+  transition: opacity 0.4s;
+  will-change: transform;
+}
+
+/* Cursor spotlight on cards */
+.spot {
+  position: relative;
+  isolation: isolate;
+}
+
+.spot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background: radial-gradient(
+    380px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(46, 233, 212, 0.14),
+    transparent 60%
+  );
+}
+
+.spot:hover::after {
+  opacity: 1;
+}
+
+/* Marquee */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-row {
+  display: flex;
+  gap: 2rem;
+  padding-right: 2rem;
+  margin: 0;
+  list-style: none;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Hero image drifts and fades as you scroll (scroll-driven animation, progressive enhancement) */
+@supports (animation-timeline: scroll()) {
+  @keyframes hero-drift {
+    to {
+      transform: translateY(18%) scale(1.08);
+      opacity: 0.2;
+    }
+  }
+
+  .hero-parallax {
+    animation: hero-drift linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 90svh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .char-in,
+  .marquee-track,
+  .hero-parallax {
+    animation: none;
+  }
+
+  .cursor-glow {
+    display: none;
+  }
+}
+
+/* ---------- Capability bento backgrounds (pure CSS patterns, one accent) ---------- */
+
+.cap {
+  background-color: var(--bg-card);
+}
+
+.cap-vision {
+  background-image:
+    radial-gradient(500px 280px at 85% 10%, rgba(46, 233, 212, 0.16), transparent 70%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 28px);
+}
+
+.cap-security {
+  background-image:
+    radial-gradient(circle at 100% 0%, rgba(46, 233, 212, 0.18), transparent 60%),
+    radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+  background-size: auto, 16px 16px;
+}
+
+.cap-n8n {
+  background-image:
+    radial-gradient(420px 240px at 0% 100%, rgba(139, 124, 255, 0.2), transparent 70%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.03), transparent 55%);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: #0d1018;
+    backdrop-filter: none;
+  }
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-block;
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.btn:active {
+  transform: scale(0.97) !important;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+.rail:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+/* ---------- Timeline ---------- */
+
+.timeline-line {
+  position: absolute;
+  left: 3px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line-strong);
+}
+
+.timeline-node {
+  position: absolute;
+  left: 0;
+  top: 2.4rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+
+/* Accent progress fills the timeline as the section scrolls through the viewport */
+@supports (animation-timeline: view()) {
+  .timeline-line::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    transform-origin: top;
+    transform: scaleY(0);
+    animation: timeline-fill linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 80%;
+  }
+
+  @keyframes timeline-fill {
+    to {
+      transform: scaleY(1);
+    }
+  }
+}
+
+/* ---------- Certificates rail ---------- */
+
+.rail {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+  padding: 8px 0 20px;
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.rail-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  padding-inline: max(20px, calc((100vw - 1180px) / 2));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-line::after {
+    animation: none;
+    transform: scaleY(1);
+  }
+}
+
+/* ---------- 3D ---------- */
+
+.tilt {
+  transform-style: preserve-3d;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s,
+    box-shadow 0.3s;
+  will-change: transform;
+}
+
+/* Deep, tinted shadow sells the lift while a card is tilted */
+.tilt:hover {
+  box-shadow:
+    0 30px 60px -20px rgba(0, 0, 0, 0.7),
+    0 0 40px -12px rgba(46, 233, 212, 0.25);
+}
+
+/* Grids that hold tilting cards need a shared 3D context */
+#projects .grid,
+#capabilities .grid {
+  perspective: 1400px;
+}
+
+@keyframes skill-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.skill-in {
+  animation: skill-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-in {
+    animation: none;
+  }
 }
