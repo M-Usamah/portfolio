@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import { Scramble } from "@/components/Scramble";
 import { Reveal } from "@/components/Reveal";
 import { filters, INITIAL_VISIBLE, projects } from "@/data/content";
 
@@ -24,7 +25,7 @@ export function Projects() {
          , Selected work
         </p>
         <h2 className="font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]">
-          What I&apos;m building now
+          <Scramble text="What I'm building now" />
         </h2>
         <p className="mt-3 mb-10 max-w-2xl text-[var(--muted)]">
           Unreal Engine tools and AI projects, Digital Twin Builder drops into any UE5 project.
@@ -87,7 +88,7 @@ export function Projects() {
             <article
               className="spot tilt group h-full overflow-hidden rounded-[22px] border border-[var(--line)] bg-[var(--bg-card)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(46,233,212,0.28)] hover:shadow-[var(--shadow)]"
             >
-              <div className="relative h-56 overflow-hidden">
+              <div className="img-reveal relative h-56 overflow-hidden">
                 <Image
                   src={project.image}
                   alt={project.title}

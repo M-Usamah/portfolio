@@ -62,6 +62,9 @@ function Core({ input, animate }: { input: React.RefObject<Input>; animate: bool
     const t = state.clock.elapsedTime;
     const { x, y, scroll } = input.current;
 
+    // Dolly the camera in as the page scrolls past the hero
+    state.camera.position.z += (10.8 - scroll * 3.6 - state.camera.position.z) * 0.06;
+
     // Ease the whole rig toward the pointer and spin it a little with page scroll
     group.current.rotation.y += (x * 0.55 + scroll * 2.2 - group.current.rotation.y) * 0.05;
     group.current.rotation.x += (-y * 0.35 - group.current.rotation.x) * 0.05;

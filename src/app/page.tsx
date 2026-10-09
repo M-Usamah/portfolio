@@ -6,6 +6,7 @@ import { Projects } from "@/components/Projects";
 import { Capabilities } from "@/components/Capabilities";
 import { Marquee } from "@/components/Marquee";
 import { PointerEffects } from "@/components/PointerEffects";
+import { ScrollVelocity } from "@/components/ScrollVelocity";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Certificates } from "@/components/Certificates";
 import { Experience } from "@/components/Experience";
@@ -23,6 +24,7 @@ export default function HomePage() {
       </a>
       <ScrollProgress />
       <PointerEffects />
+      <ScrollVelocity />
       <Navbar />
       <main id="main">
         <Hero />

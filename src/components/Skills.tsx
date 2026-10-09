@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Scramble } from "@/components/Scramble";
 import { Reveal } from "@/components/Reveal";
 import { skillGroups } from "@/data/content";
 
@@ -17,7 +18,7 @@ export function Skills() {
             id="skills-heading"
             className="font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]"
           >
-            Technical skills
+            <Scramble text="Technical skills" />
           </h2>
           <p className="mt-3 mb-12 max-w-xl text-[var(--muted)]">
             Pick an area to see the tools behind the work I ship.

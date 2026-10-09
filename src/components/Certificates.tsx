@@ -1,4 +1,5 @@
 import { certificates } from "@/data/content";
+import { Scramble } from "@/components/Scramble";
 import { Reveal } from "@/components/Reveal";
 
 export function Certificates() {
@@ -12,7 +13,7 @@ export function Certificates() {
                 id="certs-heading"
                 className="font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]"
               >
-                Certificates
+                <Scramble text="Certificates" />
               </h2>
               <p className="mt-3 max-w-xl text-[var(--muted)]">
                 ML, deep learning, agents, and production AI tooling.

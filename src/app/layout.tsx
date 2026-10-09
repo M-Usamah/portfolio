@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import { Outfit, Syne, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/content";
@@ -122,7 +123,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  // Opt into dynamic rendering: the per-request CSP nonce (src/proxy.ts) must reach Next's scripts
+  await connection();
   return (
     <html lang="en" className={`${outfit.variable} ${syne.variable} ${mono.variable} h-full`}>
       <head>

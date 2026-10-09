@@ -24,13 +24,12 @@ export function Hero() {
             </span>
           </h1>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-[var(--muted)] md:text-xl">
-            Computer vision, digital twins and Unreal tools, built secure and automated with n8n.
-            Models and software that ship.
+            <WordsIn text="Computer vision, digital twins and Unreal tools, built secure and automated with n8n. Models and software that ship." />
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <a
               href="#projects"
-              className="btn magnetic rounded-full bg-[var(--accent)] px-6 py-3.5 text-sm font-semibold text-[#041614] hover:brightness-110"
+              className="btn magnetic glow-border rounded-full bg-[var(--accent)] px-6 py-3.5 text-sm font-semibold text-[#041614] hover:brightness-110"
             >
               See current work
             </a>
@@ -76,5 +75,23 @@ function SplitWord({
         </span>
       ))}
     </span>
+  );
+}
+
+/** Fades each word in with a blur, staggered after the headline has landed. */
+function WordsIn({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(" ").map((word, i) => (
+        <span
+          key={i}
+          className="char-in inline-block"
+          style={{ animationDelay: `${650 + i * 40}ms` }}
+        >
+          {word}
+          {" "}
+        </span>
+      ))}
+    </>
   );
 }

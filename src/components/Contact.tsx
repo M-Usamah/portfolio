@@ -1,7 +1,8 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { site } from "@/data/content";
+import { Scramble } from "@/components/Scramble";
 import { Reveal } from "@/components/Reveal";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -9,7 +10,11 @@ type Status = "idle" | "loading" | "success" | "error";
 /** Web3Forms free tier requires browser-side submit (access key is safe to expose). */
 const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
 
+const LIMITS = { name: 80, email: 120, message: 4000 } as const;
+const COOLDOWN_MS = 30_000;
+
 export function Contact() {
+  const lastSent = useRef(0);
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
 
@@ -19,6 +24,22 @@ export function Contact() {
     setMessage("");
 
     const form = e.currentTarget;
+    const data = new FormData(form);
+
+    // Honeypot: real visitors never see or tick this field, so a ticked box means a bot.
+    // Pretend success and send nothing.
+    if (data.get("botcheck")) {
+      setStatus("success");
+      setMessage("Message sent. I’ll get back to you soon.");
+      form.reset();
+      return;
+    }
+
+    if (Date.now() - lastSent.current < COOLDOWN_MS) {
+      setStatus("error");
+      setMessage("Please wait a few seconds before sending another message.");
+      return;
+    }
 
     if (!WEB3FORMS_KEY) {
       setStatus("error");
@@ -26,16 +47,14 @@ export function Contact() {
       return;
     }
 
-    const data = new FormData(form);
     const payload = {
       access_key: WEB3FORMS_KEY,
-      subject: `Portfolio contact from ${String(data.get("name") || "someone")}`,
-      name: String(data.get("name") || "").trim(),
-      email: String(data.get("email") || "").trim(),
-      message: String(data.get("message") || "").trim(),
-      from_name: String(data.get("name") || "").trim(),
+      name: String(data.get("name") || "").trim().slice(0, LIMITS.name),
+      email: String(data.get("email") || "").trim().slice(0, LIMITS.email),
+      message: String(data.get("message") || "").trim().slice(0, LIMITS.message),
       botcheck: "",
     };
+    const sender = { subject: `Portfolio contact from ${payload.name || "someone"}`, from_name: payload.name };
 
     if (!payload.name || !payload.email || !payload.message) {
       setStatus("error");
@@ -50,7 +69,7 @@ export function Contact() {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, ...sender }),
       });
 
       const text = await res.text();
@@ -65,6 +84,7 @@ export function Contact() {
         throw new Error(json.message || "Failed to send message");
       }
 
+      lastSent.current = Date.now();
       setStatus("success");
       setMessage("Message sent. I’ll get back to you soon.");
       form.reset();
@@ -88,7 +108,7 @@ export function Contact() {
              , Contact
             </p>
             <h2 className="font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]">
-              Let’s build something
+              <Scramble text="Let’s build something" />
             </h2>
             <p className="mt-4 max-w-md text-[var(--muted)]">
               Open to freelance, Unreal tooling, computer vision, security and n8n automation work. Send a note or reach out
@@ -153,6 +173,8 @@ export function Contact() {
                 <input
                   name="name"
                   required
+                  maxLength={LIMITS.name}
+                  autoComplete="name"
                   className="w-full rounded-2xl border border-[var(--line)] bg-black/35 px-4 py-3.5 outline-none transition placeholder:text-[var(--faint)] focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30"
                   placeholder="Your name"
                 />
@@ -163,6 +185,8 @@ export function Contact() {
                   name="email"
                   type="email"
                   required
+                  maxLength={LIMITS.email}
+                  autoComplete="email"
                   className="w-full rounded-2xl border border-[var(--line)] bg-black/35 px-4 py-3.5 outline-none transition placeholder:text-[var(--faint)] focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30"
                   placeholder="you@email.com"
                 />
@@ -173,6 +197,7 @@ export function Contact() {
               <textarea
                 name="message"
                 required
+                maxLength={LIMITS.message}
                 rows={6}
                 className="w-full resize-y rounded-2xl border border-[var(--line)] bg-black/35 px-4 py-3.5 outline-none transition placeholder:text-[var(--faint)] focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30"
                 placeholder="What are you building?"
@@ -181,7 +206,7 @@ export function Contact() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="btn mt-6 w-full rounded-full bg-[var(--accent)] px-6 py-3.5 text-sm font-semibold text-[#041614] hover:brightness-110 disabled:opacity-60 sm:w-auto"
+              className="btn glow-border mt-6 w-full rounded-full bg-[var(--accent)] px-6 py-3.5 text-sm font-semibold text-[#041614] hover:brightness-110 disabled:opacity-60 sm:w-auto"
             >
               {status === "loading" ? "Sending…" : "Send message"}
             </button>

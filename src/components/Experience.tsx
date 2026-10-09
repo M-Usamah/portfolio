@@ -1,4 +1,5 @@
 import { experience } from "@/data/content";
+import { Scramble } from "@/components/Scramble";
 import { Reveal } from "@/components/Reveal";
 
 export function Experience() {
@@ -7,7 +8,7 @@ export function Experience() {
       <div className="container-page">
         <Reveal>
           <h2 className="mb-12 font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]">
-            Experience
+            <Scramble text="Experience" />
           </h2>
         </Reveal>
 

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { capabilities } from "@/data/content";
+import { Scramble } from "@/components/Scramble";
 import { Reveal } from "@/components/Reveal";
 
 /** Bento layout: 4 cells, rows split 4+2 then 2+4 on a 6-column grid. */
@@ -19,7 +20,7 @@ export function Capabilities() {
             id="capabilities-heading"
             className="max-w-2xl font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]"
           >
-            Models, tools, security and automation
+            <Scramble text="Models, tools, security and automation" />
           </h2>
           <p className="mt-3 mb-10 max-w-xl text-[var(--muted)]">
             Four ways I can help, from a single detection model to a full pipeline you can run.
@@ -30,7 +31,7 @@ export function Capabilities() {
           {capabilities.map((item, i) => (
             <Reveal key={item.id} delay={(i % 2) * 90} className={span[item.id]}>
               <article
-                className={`spot tilt cap cap-${item.id} group relative flex h-full min-h-[300px] flex-col justify-end overflow-hidden rounded-[22px] border border-[var(--line)] p-6 transition duration-300 hover:-translate-y-1 hover:border-[rgba(46,233,212,0.28)] hover:shadow-[var(--shadow)] md:p-8`}
+                className={`spot tilt cap cap-${item.id} ${i % 2 ? "par-b" : "par-a"} group relative flex h-full min-h-[300px] flex-col justify-end overflow-hidden rounded-[22px] border border-[var(--line)] p-6 transition duration-300 hover:-translate-y-1 hover:border-[rgba(46,233,212,0.28)] hover:shadow-[var(--shadow)] md:p-8`}
               >
                 {item.id === "twins" && (
                   <>

@@ -1,4 +1,5 @@
 import { about, site } from "@/data/content";
+import { Scramble } from "@/components/Scramble";
 import { Reveal } from "@/components/Reveal";
 
 export function About() {
@@ -11,7 +12,7 @@ export function About() {
               id="about-heading"
               className="font-[family-name:var(--font-syne)] text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em]"
             >
-              {about.headline}
+              <Scramble text={about.headline} />
             </h2>
             <p className="mt-4 font-mono text-xs uppercase tracking-[0.08em] text-[var(--faint)]">
               {about.roleLine}
