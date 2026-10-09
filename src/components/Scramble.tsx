@@ -1,17 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const GLYPHS = "01<>/\[]{}#$%&*+=?";
 
 /**
  * Headline text that decodes from random glyphs once it scrolls into view.
- * The real text is rendered on the server and exposed to assistive tech, so
- * the effect is purely visual and degrades to plain text.
+ * The real text is the only copy in the DOM (server-rendered, so crawlers and
+ * screen readers see it once); the animation temporarily rewrites that node.
  */
 export function Scramble({ text, className = "" }: { text: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [shown, setShown] = useState(text);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -28,16 +27,14 @@ export function Scramble({ text, className = "" }: { text: string; className?: s
         const tick = (now: number) => {
           const p = Math.min(1, (now - start) / duration);
           const settled = Math.floor(p * text.length);
-          setShown(
-            text
-              .split("")
-              .map((ch, i) =>
-                ch === " " || i < settled ? ch : GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
-              )
-              .join(""),
-          );
+          el.textContent = text
+            .split("")
+            .map((ch, i) =>
+              ch === " " || i < settled ? ch : GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
+            )
+            .join("");
           if (p < 1) raf = requestAnimationFrame(tick);
-          else setShown(text);
+          else el.textContent = text;
         };
         raf = requestAnimationFrame(tick);
       },
@@ -47,12 +44,13 @@ export function Scramble({ text, className = "" }: { text: string; className?: s
     return () => {
       io.disconnect();
       if (raf) cancelAnimationFrame(raf);
+      el.textContent = text;
     };
   }, [text]);
 
   return (
-    <span ref={ref} className={className} aria-label={text}>
-      <span aria-hidden="true">{shown}</span>
+    <span ref={ref} className={className} suppressHydrationWarning>
+      {text}
     </span>
   );
 }

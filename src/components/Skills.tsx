@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { Scramble } from "@/components/Scramble";
 import { Reveal } from "@/components/Reveal";
 import { skillGroups } from "@/data/content";
@@ -9,6 +9,23 @@ import { skillGroups } from "@/data/content";
 export function Skills() {
   const [active, setActive] = useState(0);
   const group = skillGroups[active];
+  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  function onKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+    const last = skillGroups.length - 1;
+    const keys: Record<string, number> = {
+      ArrowDown: Math.min(active + 1, last),
+      ArrowRight: Math.min(active + 1, last),
+      ArrowUp: Math.max(active - 1, 0),
+      ArrowLeft: Math.max(active - 1, 0),
+      Home: 0,
+      End: last,
+    };
+    if (!(e.key in keys)) return;
+    e.preventDefault();
+    setActive(keys[e.key]);
+    tabs.current[keys[e.key]]?.focus();
+  }
 
   return (
     <section id="skills" className="section-pad" aria-labelledby="skills-heading">
@@ -30,13 +47,18 @@ export function Skills() {
             <div
               role="tablist"
               aria-label="Skill groups"
+              onKeyDown={onKeyDown}
               className="flex gap-2 overflow-x-auto pb-2 md:flex-col md:gap-1 md:overflow-visible md:pb-0"
             >
               {skillGroups.map((g, i) => (
                 <button
                   key={g.name}
+                  ref={(el) => {
+                    tabs.current[i] = el;
+                  }}
                   type="button"
                   role="tab"
+                  tabIndex={active === i ? 0 : -1}
                   id={`skill-tab-${i}`}
                   aria-selected={active === i}
                   aria-controls="skill-panel"

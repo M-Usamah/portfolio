@@ -17,8 +17,9 @@ export function Hero() {
           <p className="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">
             {site.title}
           </p>
-          <h1 className="font-[family-name:var(--font-syne)] text-[clamp(1.9rem,8.7vw,3.6rem)] lg:text-[clamp(3rem,5.4vw,5.2rem)] font-extrabold leading-[0.9] tracking-[-0.055em]">
+          <h1 aria-label="Mohammed Usamah" className="font-[family-name:var(--font-syne)] text-[clamp(1.9rem,8.7vw,3.6rem)] lg:text-[clamp(3rem,5.4vw,5.2rem)] font-extrabold leading-[0.9] tracking-[-0.055em]">
             <SplitWord word="Mohammed" />
+            {" "}
             <span className="mt-1 block">
               <SplitWord word="Usamah" offset={8} gradient />
             </span>
@@ -56,7 +57,7 @@ function SplitWord({
   gradient?: boolean;
 }) {
   return (
-    <span aria-label={word} className="whitespace-nowrap">
+    <span className="whitespace-nowrap">
       {word.split("").map((ch, i) => (
         <span
           key={i}
