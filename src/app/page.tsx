@@ -4,7 +4,6 @@ import { About } from "@/components/About";
 import { Skills } from "@/components/Skills";
 import { Projects } from "@/components/Projects";
 import { Capabilities } from "@/components/Capabilities";
-import { MotionReel } from "@/components/MotionReel";
 import { Marquee } from "@/components/Marquee";
 import { PointerEffects } from "@/components/PointerEffects";
 import { ScrollProgress } from "@/components/ScrollProgress";
@@ -32,7 +31,6 @@ export default function HomePage() {
         <Capabilities />
         <Skills />
         <Projects />
-        <MotionReel />
         <Certificates />
         <Experience />
         <Contact />

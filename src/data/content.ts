@@ -21,16 +21,6 @@ export type Certificate = {
   description: string;
 };
 
-export type MotionItem = {
-  title: string;
-  description: string;
-  tags: string[];
-  /** Path under /public, e.g. "/assets/motion/reel.mp4". Falls back to a CSS animation. */
-  video?: string;
-  poster?: string;
-  variant: "orbit" | "wave" | "grid";
-};
-
 export const site = {
   name: "Mohammed Usamah",
   givenName: "Mohammed",
@@ -1381,28 +1371,6 @@ export const certificates: Certificate[] = [
     issuer: "DeepLearning.AI",
     date: "October 2023",
     description: "Fundamentals of diffusion models and generative AI applications.",
-  },
-];
-
-/** Add real work by setting `video` (and `poster`) to files in /public/assets/motion/. */
-export const motionWork: MotionItem[] = [
-  {
-    title: "Orbit loop",
-    description: "Seamless looping motion study, concentric orbits with eased timing.",
-    tags: ["Loop", "Easing", "Motion study"],
-    variant: "orbit",
-  },
-  {
-    title: "Signal pulse",
-    description: "Audio-reactive style bar animation for data and model-output visuals.",
-    tags: ["Data viz", "Rhythm", "UI motion"],
-    variant: "wave",
-  },
-  {
-    title: "Grid reveal",
-    description: "Staggered grid choreography used for scene and asset reveals.",
-    tags: ["Stagger", "Choreography", "Reveal"],
-    variant: "grid",
   },
 ];
 

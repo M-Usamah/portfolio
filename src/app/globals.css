@@ -166,117 +166,6 @@ a {
   animation: float-glow 9s ease-in-out infinite;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes bar-pulse {
-  0%,
-  100% {
-    transform: scaleY(0.15);
-  }
-  50% {
-    transform: scaleY(1);
-  }
-}
-
-@keyframes cell-pulse {
-  0%,
-  100% {
-    opacity: 0.12;
-    transform: scale(0.6);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes core-breathe {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(0.85);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.15);
-  }
-}
-
-.motion-stage {
-  background: radial-gradient(circle at 50% 50%, rgba(139, 124, 255, 0.18), #07080c 70%);
-}
-
-.motion-core {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 14%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 40px var(--accent);
-  animation: core-breathe 3s ease-in-out infinite;
-}
-
-.motion-ring {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 50%;
-  border: 1px solid rgba(46, 233, 212, 0.35);
-  border-top-color: var(--accent);
-  animation: spin 6s linear infinite;
-}
-
-.motion-ring-1 {
-  width: 34%;
-  aspect-ratio: 1;
-  margin: -17% 0 0 -17%;
-}
-
-.motion-ring-2 {
-  width: 54%;
-  aspect-ratio: 1;
-  margin: -27% 0 0 -27%;
-  animation-duration: 9s;
-  animation-direction: reverse;
-  border-top-color: var(--accent-2);
-}
-
-.motion-ring-3 {
-  width: 76%;
-  aspect-ratio: 1;
-  margin: -38% 0 0 -38%;
-  animation-duration: 14s;
-}
-
-.motion-bar {
-  width: 3.5%;
-  height: 56%;
-  border-radius: 999px;
-  background: linear-gradient(180deg, var(--accent), var(--accent-2));
-  transform-origin: center;
-  animation: bar-pulse 1.6s ease-in-out infinite;
-}
-
-.motion-grid {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 8px;
-  padding: 7%;
-  height: 100%;
-  align-content: center;
-}
-
-.motion-grid span {
-  aspect-ratio: 1;
-  border-radius: 6px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  animation: cell-pulse 2.4s ease-in-out infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -290,11 +179,7 @@ a {
   }
 
   .hero-glow,
-  .animate-fade-up,
-  .motion-core,
-  .motion-ring,
-  .motion-bar,
-  .motion-grid span {
+  .animate-fade-up {
     animation: none;
   }
 }
